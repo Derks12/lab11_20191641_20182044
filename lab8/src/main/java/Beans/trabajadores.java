@@ -4,7 +4,6 @@ public class trabajadores {
 
     private String nombres;
     private String apellidos;
-    private String correo;
     private String dni;
     private Integer idsede;
 
@@ -23,14 +22,6 @@ public class trabajadores {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getDni() {
