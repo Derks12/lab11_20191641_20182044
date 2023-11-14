@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Beans.trabajadores;
+import Beans.trabajadores_credenciales;
 import DTO.VentasPorTrabajador;
 import Daos.DaoBase;
 
@@ -11,23 +12,22 @@ public class trabajadorDao extends DaoBase{
 
     public trabajadores obtenerTrabajador(String dni){
 
-        trabajadores trabajadores = null;
+        trabajadores_credenciales trabajadores_credenciales = null;
 
-        String sql = "Select * from trabajadores t \n" +
-                "Where t.dni = ? ";
+        String sql = "Select * from trabajadores_credenciales t \n" +
+                "Where t.trabajadores_dni = ? ";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1,dni);
+            pstmt.setString(1,trabajadores_credenciales);
 
             try (ResultSet rs = pstmt.executeQuery()) {
 
                 if (rs.next()) {
-                    trabajadores = new trabajadores();
-                    trabajadores.setDni(rs.getString(1));
-                    trabajadores.setNombres(rs.getString(2));
-                    trabajadores.setApellidos(rs.getString(3));
-                    trabajadores.setIdsede(rs.getInt(4));
+                    trabajadores_credenciales = new trabajadores_credenciales();
+                    trabajadores_credenciales.setTrabajadores_dni(rs.getString(1));
+                    trabajadores_credenciales.setEmail(rs.getString(2));
+                    trabajadores_credenciales.setPassword_hashed(rs.getString(3));
                 }
             }
         } catch (SQLException e){
