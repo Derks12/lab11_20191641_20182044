@@ -9,19 +9,32 @@ import Daos.DaoBase;
 
 public class trabajadorDao extends DaoBase{
 
+    public trabajadores obtenerTrabajador(String dni){
 
+        trabajadores trabajadores = null;
 
+        String sql = "Select * from trabajadores t \n" +
+                "Where t.dni = ? ";
 
+        try (Connection conn = this.getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,dni);
 
+            try (ResultSet rs = pstmt.executeQuery()) {
 
-
-
-
-
-
-
-
-
+                if (rs.next()) {
+                    trabajadores = new trabajadores();
+                    trabajadores.setDni(rs.getString(1));
+                    trabajadores.setNombres(rs.getString(2));
+                    trabajadores.setApellidos(rs.getString(3));
+                    trabajadores.setIdsede(rs.getInt(4));
+                }
+            }
+        } catch (SQLException e){
+                e.printStackTrace();
+        }
+        return trabajadores;
+    }
 
     public boolean validarUsuarioPasswordHashed(String username, String password){
 
