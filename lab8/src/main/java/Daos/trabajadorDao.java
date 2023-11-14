@@ -1,7 +1,10 @@
 package Daos;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import Beans.trabajadores;
+import DTO.VentasPorTrabajador;
 import Daos.DaoBase;
 
 public class trabajadorDao extends DaoBase{
@@ -47,10 +50,25 @@ public class trabajadorDao extends DaoBase{
 
 
 
+    public ArrayList<VentasPorTrabajador> listaVentasPorTrabajador() {
 
+        ArrayList<VentasPorTrabajador> lista = new ArrayList<>();
 
+        String sql = "select";
 
+        try (Connection conn = this.getConection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+            while (rs.next()){
+                VentasPorTrabajador vpt = new VentasPorTrabajador();
+                vpt.setNombreTrabajador(rs.getString(1));
+                vpt.setCantidadVentas(rs.getInt(2));
+            }
 
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
 
-
+        return lista;
+    }
 }
