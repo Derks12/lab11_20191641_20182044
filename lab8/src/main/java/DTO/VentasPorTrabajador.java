@@ -2,15 +2,15 @@ package DTO;
 
 public class VentasPorTrabajador {
 
-    private String nombreTrabajador;
+    private String dniTrabajador;
     private int cantidadVentas;
 
-    public String getNombreTrabajador() {
-        return nombreTrabajador;
+    public String getDniTrabajador() {
+        return dniTrabajador;
     }
 
-    public void setNombreTrabajador(String nombreTrabajador) {
-        this.nombreTrabajador = nombreTrabajador;
+    public void setDniTrabajador(String dniTrabajador) {
+        this.dniTrabajador = dniTrabajador;
     }
 
     public int getCantidadVentas() {

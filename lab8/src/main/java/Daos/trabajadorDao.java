@@ -23,7 +23,6 @@ public class trabajadorDao extends DaoBase{
 
 
 
-
     public boolean validarUsuarioPasswordHashed(String username, String password){
 
         String sql = "SELECT * FROM employees_credentials where email = ? and password_hashed = sha2(?,256)";
@@ -54,14 +53,16 @@ public class trabajadorDao extends DaoBase{
 
         ArrayList<VentasPorTrabajador> lista = new ArrayList<>();
 
-        String sql = "select";
+        String sql = "select dniTrabajador as 'DNI', count(idventa) as '# de ventas'" +
+                "from ventas" +
+                "group by dniTrabajador;";
 
         try (Connection conn = this.getConection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
             while (rs.next()){
                 VentasPorTrabajador vpt = new VentasPorTrabajador();
-                vpt.setNombreTrabajador(rs.getString(1));
+                vpt.setDniTrabajador(rs.getString(1));
                 vpt.setCantidadVentas(rs.getInt(2));
             }
 
